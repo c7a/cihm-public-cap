@@ -1,10 +1,9 @@
 FROM httpd:2.4.29-alpine
 
 RUN apk add --update subversion && \
-    svn co -r6777 http://svn.c7a.ca/svn/c7a/cap/trunk/CAP/root/static/ /usr/local/apache2/htdocs/static/ && \
     svn co -r6777 http://svn.c7a.ca/svn/c7a/xml/trunk/published/ /usr/local/apache2/htdocs/xml-published/
 
-
+COPY cihm-error /usr/local/apache2/htdocs/cihm-error/
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 
 # This should be changed when running container to the correct host and post for the relevant instance.  This is only Dev.
