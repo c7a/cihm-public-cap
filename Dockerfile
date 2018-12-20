@@ -1,7 +1,7 @@
-FROM httpd:2.4.29-alpine
+FROM httpd:2.4.37
 
-RUN apk add --update subversion && \
-    svn co -r6777 http://svn.c7a.ca/svn/c7a/xml/trunk/published/ /usr/local/apache2/htdocs/xml-published/
+RUN apt-get update ; apt-get install -yq subversion && apt-get clean && \
+    svn co --trust-server-cert https://github.com/crkn-rcdr/Digital-Preservation.git/trunk/xml/published/ /usr/local/apache2/htdocs/xml-published/
 
 COPY cihm-error /usr/local/apache2/htdocs/cihm-error/
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
